@@ -14,7 +14,7 @@ import com.menesdurak.appterncasestudy.viewmodel.DeezerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GenreFragment : Fragment() {
+class GenresFragment : Fragment() {
 
     private var _binding: FragmentGenreBinding? = null
     private val binding get() = _binding!!
