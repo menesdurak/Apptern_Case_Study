@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.menesdurak.appterncasestudy.adapter.GenreAdapter
@@ -39,9 +40,11 @@ class GenreFragment : Fragment() {
 
         viewModel.getGenres()
 
-        viewModel.genreList.observe(viewLifecycleOwner) {
+        viewModel.genreList.observe(viewLifecycleOwner) {genre ->
             binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-            val genreAdapter = GenreAdapter(it.data)
+            val genreAdapter = GenreAdapter(genre.data) {
+                Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+            }
             binding.recyclerView.adapter = genreAdapter
         }
     }
