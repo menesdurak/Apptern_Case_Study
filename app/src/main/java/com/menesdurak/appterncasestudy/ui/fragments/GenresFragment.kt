@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.menesdurak.appterncasestudy.adapter.GenreAdapter
-import com.menesdurak.appterncasestudy.databinding.FragmentGenreBinding
+import com.menesdurak.appterncasestudy.databinding.FragmentGenresBinding
 import com.menesdurak.appterncasestudy.viewmodel.DeezerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GenresFragment : Fragment() {
 
-    private var _binding: FragmentGenreBinding? = null
+    private var _binding: FragmentGenresBinding? = null
     private val binding get() = _binding!!
     private val viewModel by lazy {
         ViewModelProvider(
@@ -30,7 +30,7 @@ class GenresFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGenreBinding.inflate(inflater, container, false)
+        _binding = FragmentGenresBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -42,8 +42,12 @@ class GenresFragment : Fragment() {
 
         viewModel.genreList.observe(viewLifecycleOwner) {genre ->
             binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-            val genreAdapter = GenreAdapter(genre.data) {
-                Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+            val genreAdapter = GenreAdapter(genre.data) {genreData ->
+                val action = GenresFragmentDirections.actionGenresFragmentToArtistsFragment(
+                    genreName = genreData.name,
+                    genreId = genreData.id
+                )
+                findNavController().navigate(action)
             }
             binding.recyclerView.adapter = genreAdapter
         }
