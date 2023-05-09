@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.menesdurak.appterncasestudy.data.model.Artist
 import com.menesdurak.appterncasestudy.data.model.Genre
 import com.menesdurak.appterncasestudy.data.remote.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +18,19 @@ class DeezerViewModel @Inject constructor(private val retrofitRepository: Retrof
     val genreList: LiveData<Genre>
         get() = _genreList
 
+    private val _artistList: MutableLiveData<Artist> = MutableLiveData()
+    val artistList: LiveData<Artist>
+        get() = _artistList
+
     fun getGenres() {
         viewModelScope.launch {
             _genreList.value = retrofitRepository.getGenres()
+        }
+    }
+
+    fun getArtists(genreId: Int) {
+        viewModelScope.launch {
+            _artistList.value = retrofitRepository.getArtists(genreId)
         }
     }
 }
