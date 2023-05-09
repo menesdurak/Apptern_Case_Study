@@ -3,4 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="background_image_of_genre">Background image of genre</string>
+    <string name="artist_name">Artist Name</string>
+    <string name="genre_name">Genre Name</string>
 </resources>
