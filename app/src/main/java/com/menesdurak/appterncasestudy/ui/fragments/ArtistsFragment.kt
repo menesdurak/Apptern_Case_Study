@@ -6,9 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import com.menesdurak.appterncasestudy.adapter.ArtistAdapter
 import com.menesdurak.appterncasestudy.databinding.FragmentArtistsBinding
 import com.menesdurak.appterncasestudy.viewmodel.DeezerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArtistsFragment : Fragment() {
 
     private var _binding: FragmentArtistsBinding? = null
@@ -20,6 +26,9 @@ class ArtistsFragment : Fragment() {
         )[DeezerViewModel::class.java]
     }
 
+    private var genreName: String = ""
+    private var genreId: Int = -1
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,12 +36,25 @@ class ArtistsFragment : Fragment() {
     ): View {
         _binding = FragmentArtistsBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        //Receiving location ID
+        val args: ArtistsFragmentArgs by navArgs()
+        genreName = args.genreName
+        genreId = args.genreId
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getArtists(genreId)
+
+        viewModel.artistList.observe(viewLifecycleOwner) {artist ->
+            binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+            val artistAdapter = ArtistAdapter(artist.data)
+            binding.recyclerView.adapter = artistAdapter
+        }
     }
 
     override fun onDestroyView() {
