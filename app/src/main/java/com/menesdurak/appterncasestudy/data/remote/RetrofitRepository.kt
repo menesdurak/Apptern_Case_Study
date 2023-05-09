@@ -1,5 +1,6 @@
 package com.menesdurak.appterncasestudy.data.remote
 
+import com.menesdurak.appterncasestudy.data.model.Album
 import com.menesdurak.appterncasestudy.data.model.Artist
 import com.menesdurak.appterncasestudy.data.model.Genre
 import javax.inject.Inject
@@ -8,5 +9,7 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
 
     suspend fun getGenres(): Genre = retrofitServiceInstance.getGenres()
 
-    suspend fun getArtists(genreId: Int) : Artist = retrofitServiceInstance.getArtists(genreId)
+    suspend fun getArtists(genreId: Int): Artist = retrofitServiceInstance.getArtists(genreId)
+
+    suspend fun getAlbums(artistId: Int): Album = retrofitServiceInstance.getAlbums(artistId)
 }
