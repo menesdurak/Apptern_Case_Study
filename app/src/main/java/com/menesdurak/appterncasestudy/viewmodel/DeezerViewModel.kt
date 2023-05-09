@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.menesdurak.appterncasestudy.data.local.FavoriteTrackRepository
 import com.menesdurak.appterncasestudy.data.model.Album
 import com.menesdurak.appterncasestudy.data.model.Artist
+import com.menesdurak.appterncasestudy.data.model.FavoriteTrack
 import com.menesdurak.appterncasestudy.data.model.Genre
 import com.menesdurak.appterncasestudy.data.model.Track
 import com.menesdurak.appterncasestudy.data.remote.RetrofitRepository
@@ -14,7 +16,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DeezerViewModel @Inject constructor(private val retrofitRepository: RetrofitRepository) : ViewModel() {
+class DeezerViewModel @Inject constructor(
+    private val retrofitRepository: RetrofitRepository,
+    private val favoriteTrackRepository: FavoriteTrackRepository
+) : ViewModel() {
 
     private val _genreList: MutableLiveData<Genre> = MutableLiveData()
     val genreList: LiveData<Genre>
@@ -31,6 +36,10 @@ class DeezerViewModel @Inject constructor(private val retrofitRepository: Retrof
     private val _trackList: MutableLiveData<Track> = MutableLiveData()
     val trackList: LiveData<Track>
         get() = _trackList
+
+    private val _favoriteTrackList: MutableLiveData<List<FavoriteTrack>> = MutableLiveData()
+    val favoriteTrackList: LiveData<List<FavoriteTrack>>
+        get() = _favoriteTrackList
 
     fun getGenres() {
         viewModelScope.launch {
@@ -53,6 +62,24 @@ class DeezerViewModel @Inject constructor(private val retrofitRepository: Retrof
     fun getTracks(albumId: Int) {
         viewModelScope.launch {
             _trackList.value = retrofitRepository.getTracks(albumId)
+        }
+    }
+
+    fun getAllFavoriteTracks() {
+        viewModelScope.launch {
+            _favoriteTrackList.value = favoriteTrackRepository.getAllFavoriteTracks()
+        }
+    }
+
+    fun addFavoriteTrack(favoriteTrack: FavoriteTrack) {
+        viewModelScope.launch {
+            favoriteTrackRepository.addFavoriteTrack(favoriteTrack)
+        }
+    }
+
+    fun deleteFavoriteTrack(favoriteTrack: FavoriteTrack) {
+        viewModelScope.launch {
+            favoriteTrackRepository.deleteFavoriteTrack(favoriteTrack)
         }
     }
 }
