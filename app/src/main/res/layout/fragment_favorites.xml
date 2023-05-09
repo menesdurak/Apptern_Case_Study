@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.GenresFragment"
-    android:id="@+id/genresFragment">
+    tools:context=".ui.fragments.FavoritesFragment"
+    android:id="@+id/favoritesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
 </FrameLayout>
