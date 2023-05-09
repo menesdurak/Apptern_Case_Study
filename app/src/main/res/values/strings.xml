@@ -9,4 +9,6 @@
     <string name="album_image">Album image</string>
     <string name="track_image">Track image</string>
     <string name="is_favorite_icon">is favorite icon</string>
+    <string name="genres">Genres</string>
+    <string name="favorites">Favorites</string>
 </resources>
