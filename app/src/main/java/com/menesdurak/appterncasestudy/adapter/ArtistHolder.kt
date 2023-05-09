@@ -3,5 +3,11 @@ package com.menesdurak.appterncasestudy.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class ArtistHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ArtistHolder(view: View, clickAtPosition: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+
+    init {
+        itemView.setOnClickListener {
+            clickAtPosition(adapterPosition)
+        }
+    }
 }

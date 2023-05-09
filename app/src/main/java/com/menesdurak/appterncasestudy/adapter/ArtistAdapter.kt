@@ -8,11 +8,16 @@ import com.bumptech.glide.Glide
 import com.menesdurak.appterncasestudy.R
 import com.menesdurak.appterncasestudy.data.model.ArtistData
 
-class ArtistAdapter(private val list: List<ArtistData>) : RecyclerView.Adapter<ArtistHolder>() {
+class ArtistAdapter(
+    private val list: List<ArtistData>,
+    private val onItemClicked: (ArtistData) -> Unit
+) : RecyclerView.Adapter<ArtistHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistHolder {
         return ArtistHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_artist, parent, false)
-        )
+        ){
+            onItemClicked(list[it])
+        }
     }
 
     override fun getItemCount(): Int = list.size

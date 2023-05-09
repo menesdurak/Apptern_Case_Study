@@ -37,7 +37,7 @@ class ArtistsFragment : Fragment() {
         _binding = FragmentArtistsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        //Receiving location ID
+        //Receiving arguments
         val args: ArtistsFragmentArgs by navArgs()
         genreName = args.genreName
         genreId = args.genreId
@@ -52,7 +52,14 @@ class ArtistsFragment : Fragment() {
 
         viewModel.artistList.observe(viewLifecycleOwner) {artist ->
             binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-            val artistAdapter = ArtistAdapter(artist.data)
+            val artistAdapter = ArtistAdapter(artist.data){artistData ->
+                val action = ArtistsFragmentDirections.actionArtistsFragmentToAlbumsFragment(
+                    artistName = artistData.name,
+                    artistId = artistData.id,
+                    artistBigPictureLink = artistData.picture_big
+                )
+                findNavController().navigate(action)
+            }
             binding.recyclerView.adapter = artistAdapter
         }
     }
