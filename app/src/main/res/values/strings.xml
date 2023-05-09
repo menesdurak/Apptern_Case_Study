@@ -7,4 +7,6 @@
     <string name="genre_name">Genre Name</string>
     <string name="image_of_the_artist">Image of the artist</string>
     <string name="album_image">Album image</string>
+    <string name="track_image">Track image</string>
+    <string name="is_favorite_icon">is favorite icon</string>
 </resources>
