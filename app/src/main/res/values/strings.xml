@@ -5,4 +5,6 @@
     <string name="background_image_of_genre">Background image of genre</string>
     <string name="artist_name">Artist Name</string>
     <string name="genre_name">Genre Name</string>
+    <string name="image_of_the_artist">Image of the artist</string>
+    <string name="album_image">Album image</string>
 </resources>
