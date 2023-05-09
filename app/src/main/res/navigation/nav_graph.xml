@@ -24,5 +24,23 @@
         <argument
             android:name="genreId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_artistsFragment_to_albumsFragment"
+            app:destination="@id/albumsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="com.menesdurak.appterncasestudy.ui.fragments.AlbumsFragment"
+        android:label="fragment_albums"
+        tools:layout="@layout/fragment_albums" >
+        <argument
+            android:name="artistName"
+            app:argType="string" />
+        <argument
+            android:name="artistId"
+            app:argType="integer" />
+        <argument
+            android:name="artistBigPictureLink"
+            app:argType="string" />
     </fragment>
 </navigation>
