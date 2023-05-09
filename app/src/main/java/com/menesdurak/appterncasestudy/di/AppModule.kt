@@ -1,5 +1,8 @@
 package com.menesdurak.appterncasestudy.di
 
+import android.app.Application
+import com.menesdurak.appterncasestudy.data.local.FavoriteTrackDao
+import com.menesdurak.appterncasestudy.data.local.FavoriteTrackDatabase
 import com.menesdurak.appterncasestudy.data.remote.RetrofitServiceInstance
 import com.menesdurak.appterncasestudy.util.Constants
 import dagger.Module
@@ -27,5 +30,17 @@ class AppModule {
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun getAppDatabase(context: Application): FavoriteTrackDatabase {
+        return FavoriteTrackDatabase.getDatabase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getFavoriteTrackDao(favoriteTrackDatabase: FavoriteTrackDatabase): FavoriteTrackDao {
+        return favoriteTrackDatabase.getFavoriteTrackDao()
     }
 }
