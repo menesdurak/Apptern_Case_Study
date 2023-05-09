@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -61,9 +62,15 @@ class AlbumsFragment : Fragment() {
 
         viewModel.albumList.observe(viewLifecycleOwner) { album ->
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            val albumAdapter = AlbumAdapter(album.data)
+            val albumAdapter = AlbumAdapter(album.data) {albumData ->
+                val action = AlbumsFragmentDirections.actionAlbumsFragmentToTracksFragment(
+                    albumId = albumData.id,
+                    albumName = albumData.title,
+                    albumImageLink = albumData.cover_medium
+                )
+                findNavController().navigate(action)
+            }
             binding.recyclerView.adapter = albumAdapter
-            println(artistId)
         }
     }
 
