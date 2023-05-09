@@ -17,5 +17,12 @@
         android:id="@+id/artistsFragment"
         android:name="com.menesdurak.appterncasestudy.ui.fragments.ArtistsFragment"
         android:label="fragment_artists"
-        tools:layout="@layout/fragment_artists" />
+        tools:layout="@layout/fragment_artists" >
+        <argument
+            android:name="genreName"
+            app:argType="string" />
+        <argument
+            android:name="genreId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
