@@ -41,6 +41,10 @@ class DeezerViewModel @Inject constructor(
     val favoriteTrackList: LiveData<List<FavoriteTrack>>
         get() = _favoriteTrackList
 
+    private val _favoriteTrackIdList: MutableLiveData<List<Int>> = MutableLiveData()
+    val favoriteTrackIdList: LiveData<List<Int>>
+        get() = _favoriteTrackIdList
+
     fun getGenres() {
         viewModelScope.launch {
             _genreList.value = retrofitRepository.getGenres()
@@ -80,6 +84,14 @@ class DeezerViewModel @Inject constructor(
     fun deleteFavoriteTrack(favoriteTrack: FavoriteTrack) {
         viewModelScope.launch {
             favoriteTrackRepository.deleteFavoriteTrack(favoriteTrack)
+        }
+    }
+
+    fun getAllFavoriteTrackIds() {
+        viewModelScope.launch {
+            _favoriteTrackIdList.value = favoriteTrackRepository.getAllFavoriteTracks().map {
+                it.remoteId
+            }
         }
     }
 }
