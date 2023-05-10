@@ -53,43 +53,47 @@ class TracksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getAllFavoriteTrackIds()
+        viewModel.getAllFavoriteTrackIds()
         viewModel.getTracks(albumId)
 
         viewModel.trackList.observe(viewLifecycleOwner) { track ->
-            binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            val albumAdapter = TrackAdapter(track.data, albumImageLink)
-            binding.recyclerView.adapter = albumAdapter
-            albumAdapter.setOnFavoriteClickListener(object : TrackAdapter.OnFavoriteClickListener {
-                override fun onFavoriteClick(position: Int) {
-                    val favoriteTrack =
-                        FavoriteTrack(
-                            track.data[position].id,
-                            track.data[position].title,
-                            track.data[position].duration,
-                            albumImageLink,
-                            track.data[position].preview
-                        )
-                    viewModel.favoriteTrackIdList.observe(viewLifecycleOwner) { favoriteTrackIdList ->
-                        if (favoriteTrack.remoteId !in favoriteTrackIdList) {
-                            viewModel.addFavoriteTrack(favoriteTrack)
-                        } else {
-                            viewModel.deleteFavoriteTrackWithId(favoriteTrack.remoteId)
+            viewModel.favoriteTrackIdList.observe(viewLifecycleOwner) {favoriteTracksIdList ->
+                binding.recyclerView.layoutManager = LinearLayoutManager(context)
+                val albumAdapter = TrackAdapter(track.data, albumImageLink, favoriteTracksIdList)
+                binding.recyclerView.adapter = albumAdapter
+                albumAdapter.setOnFavoriteClickListener(object : TrackAdapter.OnFavoriteClickListener {
+                    override fun onFavoriteClick(position: Int) {
+                        val favoriteTrack =
+                            FavoriteTrack(
+                                track.data[position].id,
+                                track.data[position].title,
+                                track.data[position].duration,
+                                albumImageLink,
+                                track.data[position].preview
+                            )
+                        viewModel.favoriteTrackIdList.observe(viewLifecycleOwner) { favoriteTrackIdList ->
+                            if (favoriteTrack.remoteId !in favoriteTrackIdList) {
+                                viewModel.addFavoriteTrack(favoriteTrack)
+                            } else {
+                                viewModel.deleteFavoriteTrackWithId(favoriteTrack.remoteId)
+                            }
                         }
                     }
-                }
 
-            })
-            albumAdapter.setOnPlayClickListener(object : TrackAdapter.OnPlayClickListener {
-                override fun onPlayClick(position: Int) {
-                    if (!mediaPlayer.isPlaying) {
-                        playTrack(mediaPlayer, track.data[position].preview)
-                    } else {
-                        mediaPlayer.stop()
-                        mediaPlayer.reset()
+                })
+                albumAdapter.setOnPlayClickListener(object : TrackAdapter.OnPlayClickListener {
+                    override fun onPlayClick(position: Int) {
+                        if (!mediaPlayer.isPlaying) {
+                            playTrack(mediaPlayer, track.data[position].preview)
+                        } else {
+                            mediaPlayer.stop()
+                            mediaPlayer.reset()
+                        }
                     }
-                }
 
-            })
+                })
+
+            }
 
         }
 

@@ -2,6 +2,7 @@ package com.menesdurak.appterncasestudy.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -10,7 +11,8 @@ import com.menesdurak.appterncasestudy.data.model.TrackData
 
 class TrackAdapter(
     private val list: List<TrackData>,
-    private val albumImageLink: String
+    private val albumImageLink: String,
+    private val favoriteTracksIdList: List<Int>
 ) :
     RecyclerView.Adapter<TrackHolder>() {
 
@@ -37,6 +39,13 @@ class TrackAdapter(
             .fitCenter()
             .placeholder(R.drawable.loading)
             .into(holder.itemView.findViewById(R.id.ivTrack))
+        if (list[position].id in favoriteTracksIdList) {
+            holder.itemView.findViewById<ImageView>(R.id.ivFavorite)
+                .setImageResource(R.drawable.ic_favorite_filled)
+        } else {
+            holder.itemView.findViewById<ImageView>(R.id.ivFavorite)
+                .setImageResource(R.drawable.ic_favorite_empty)
+        }
     }
 
     interface OnPlayClickListener {
