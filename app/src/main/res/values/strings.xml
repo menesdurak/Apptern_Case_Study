@@ -11,4 +11,5 @@
     <string name="is_favorite_icon">is favorite icon</string>
     <string name="genres">Genres</string>
     <string name="favorites">Favorites</string>
+    <string name="deezer_image">Deezer image</string>
 </resources>
