@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,10 +50,31 @@ class TracksFragment : Fragment() {
 
         viewModel.getTracks(albumId)
 
-        viewModel.trackList.observe(viewLifecycleOwner) {track ->
+        viewModel.trackList.observe(viewLifecycleOwner) { track ->
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             val albumAdapter = TrackAdapter(track.data, albumImageLink)
             binding.recyclerView.adapter = albumAdapter
+            albumAdapter.setOnFavoriteClickListener(object : TrackAdapter.OnFavoriteClickListener {
+                override fun onFavoriteClick(position: Int) {
+                    Toast.makeText(
+                        context,
+                        "Favorite: ${track.data[position].title}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            })
+            albumAdapter.setOnPlayClickListener(object : TrackAdapter.OnPlayClickListener {
+                override fun onPlayClick(position: Int) {
+                    Toast.makeText(
+                        context,
+                        "Play: ${track.data[position].title}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            })
+
         }
 
     }

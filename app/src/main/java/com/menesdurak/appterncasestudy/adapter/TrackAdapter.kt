@@ -8,12 +8,21 @@ import com.bumptech.glide.Glide
 import com.menesdurak.appterncasestudy.R
 import com.menesdurak.appterncasestudy.data.model.TrackData
 
-class TrackAdapter(private val list: List<TrackData>, private val albumImageLink: String) :
+class TrackAdapter(
+    private val list: List<TrackData>,
+    private val albumImageLink: String
+) :
     RecyclerView.Adapter<TrackHolder>() {
+
+    private lateinit var playListener: OnPlayClickListener
+    private lateinit var favoriteListener: OnFavoriteClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackHolder {
         return TrackHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_track, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_track, parent, false),
+            playListener, favoriteListener
         )
+
     }
 
     override fun getItemCount(): Int = list.size
@@ -28,5 +37,23 @@ class TrackAdapter(private val list: List<TrackData>, private val albumImageLink
             .fitCenter()
             .placeholder(R.drawable.loading)
             .into(holder.itemView.findViewById(R.id.ivTrack))
+    }
+
+    interface OnPlayClickListener {
+
+        fun onPlayClick(position: Int)
+    }
+
+    fun setOnPlayClickListener(listener: OnPlayClickListener) {
+        playListener = listener
+    }
+
+    interface OnFavoriteClickListener {
+
+        fun onFavoriteClick(position: Int)
+    }
+
+    fun setOnFavoriteClickListener(listener: OnFavoriteClickListener) {
+        favoriteListener = listener
     }
 }
