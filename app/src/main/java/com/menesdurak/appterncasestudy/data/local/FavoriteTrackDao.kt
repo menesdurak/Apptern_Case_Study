@@ -16,6 +16,9 @@ interface FavoriteTrackDao {
     @Delete
     suspend fun deleteFavoriteTrack(favoriteTrack: FavoriteTrack)
 
+    @Query("DELETE FROM favorite_tracks_table WHERE remoteId = :favoriteTrackId")
+    suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Int)
+
     @Query("SELECT * FROM favorite_tracks_table ORDER BY localId ASC")
     suspend fun getAllFavoriteTracks(): List<FavoriteTrack>
 
