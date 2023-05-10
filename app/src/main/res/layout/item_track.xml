@@ -6,6 +6,18 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
+    <TextView
+        android:id="@+id/tvTransparent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivFavorite"
+        android:layout_marginEnd="16dp"
+        android:translationZ="1dp"/>
+
     <ImageView
         android:id="@+id/ivTrack"
         android:layout_width="wrap_content"
