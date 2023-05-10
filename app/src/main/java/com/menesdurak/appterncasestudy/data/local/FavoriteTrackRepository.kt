@@ -13,6 +13,6 @@ class FavoriteTrackRepository @Inject constructor(private val favoriteTrackDao: 
         favoriteTrackDao.deleteFavoriteTrack(favoriteTrack)
     }
 
-    fun getAllFavoriteTracks(): List<FavoriteTrack> =
+    suspend fun getAllFavoriteTracks(): List<FavoriteTrack> =
         favoriteTrackDao.getAllFavoriteTracks()
 }
