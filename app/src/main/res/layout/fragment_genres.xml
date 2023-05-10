@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.GenresFragment"
-    android:id="@+id/genresFragment">
+    android:id="@+id/genresFragment"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivDeezer"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/deezer"
+        android:contentDescription="@string/deezer_image"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</FrameLayout>
+</LinearLayout>

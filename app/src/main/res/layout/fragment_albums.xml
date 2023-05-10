@@ -6,6 +6,14 @@
     tools:context=".ui.fragments.AlbumsFragment"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tvArtistName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        tools:text="Mor ve Ötesi"
+        android:textSize="30sp"/>
+
     <ImageView
         android:id="@+id/ivArtistDetail"
         android:layout_width="match_parent"

@@ -58,6 +58,8 @@ class AlbumsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvArtistName.text = artistName
+
         viewModel.getAlbums(artistId)
 
         viewModel.albumList.observe(viewLifecycleOwner) { album ->

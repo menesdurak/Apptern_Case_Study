@@ -52,6 +52,8 @@ class TracksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvAlbumName.text = albumName
+
         viewModel.getAllFavoriteTrackIds()
         viewModel.getAllFavoriteTrackIds()
         viewModel.getTracks(albumId)

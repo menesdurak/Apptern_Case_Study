@@ -48,6 +48,8 @@ class ArtistsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvGenreName.text = genreName
+
         viewModel.getArtists(genreId)
 
         viewModel.artistList.observe(viewLifecycleOwner) {artist ->
