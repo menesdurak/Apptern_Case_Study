@@ -32,7 +32,8 @@ class TrackAdapter(
     override fun onBindViewHolder(holder: TrackHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.tvTrackName).text = list[position].title
         holder.itemView.findViewById<TextView>(R.id.tvTrackLength).text =
-            list[position].duration.toString()
+            convertLengthToMinAndSec(list[position].duration)
+
         Glide
             .with(holder.itemView.context)
             .load(albumImageLink)
@@ -64,5 +65,11 @@ class TrackAdapter(
 
     fun setOnFavoriteClickListener(listener: OnFavoriteClickListener) {
         favoriteListener = listener
+    }
+
+    private fun convertLengthToMinAndSec(trackLength: Int): String {
+        val minute = trackLength / 60
+        val second = trackLength % 60
+        return "$minute:$second\""
     }
 }

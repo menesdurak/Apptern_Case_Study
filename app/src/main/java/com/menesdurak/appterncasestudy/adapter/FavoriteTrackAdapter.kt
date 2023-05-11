@@ -26,7 +26,8 @@ class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
     override fun onBindViewHolder(holder: FavoriteTrackHolder, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.tvTrackName).text = list[position].name
         holder.itemView.findViewById<TextView>(R.id.tvTrackLength).text =
-            list[position].length.toString()
+            convertLengthToMinAndSec(list[position].length)
+
         holder.itemView.findViewById<ImageView>(R.id.ivFavorite)
             .setImageResource(R.drawable.ic_favorite_filled)
         Glide
@@ -53,5 +54,11 @@ class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
 
     fun setOnFavoriteClickListener(listener: OnFavoriteClickListener) {
         favoriteListener = listener
+    }
+
+    private fun convertLengthToMinAndSec(trackLength: Int): String {
+        val minute = trackLength / 60
+        val second = trackLength % 60
+        return "$minute:$second\""
     }
 }
