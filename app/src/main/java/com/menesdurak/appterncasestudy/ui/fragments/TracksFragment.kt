@@ -55,7 +55,6 @@ class TracksFragment : Fragment() {
         binding.tvAlbumName.text = albumName
 
         viewModel.getAllFavoriteTrackIds()
-        viewModel.getAllFavoriteTrackIds()
         viewModel.getTracks(albumId)
 
         viewModel.trackList.observe(viewLifecycleOwner) { track ->
@@ -73,12 +72,11 @@ class TracksFragment : Fragment() {
                                 albumImageLink,
                                 track.data[position].preview
                             )
-                        viewModel.favoriteTrackIdList.observe(viewLifecycleOwner) { favoriteTrackIdList ->
-                            if (favoriteTrack.remoteId !in favoriteTrackIdList) {
-                                viewModel.addFavoriteTrack(favoriteTrack)
-                            } else {
-                                viewModel.deleteFavoriteTrackWithId(favoriteTrack.remoteId)
-                            }
+                        if (favoriteTrack.remoteId !in favoriteTracksIdList) {
+                            viewModel.addFavoriteTrack(favoriteTrack)
+
+                        } else {
+                            viewModel.deleteFavoriteTrackWithId(favoriteTrack.remoteId)
                         }
                     }
 
