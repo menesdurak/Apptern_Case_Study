@@ -52,7 +52,7 @@ Deezer App
 This app uses [***MVVM (Model View View-Model)***]
 
 ## Open API
-[https://rickandmortyapi.com/](https://developers.deezer.com/api)
+https://developers.deezer.com/api
 
 ### Connect With Me
 
