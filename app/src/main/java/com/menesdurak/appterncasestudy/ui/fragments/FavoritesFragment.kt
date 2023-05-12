@@ -59,7 +59,7 @@ class FavoritesFragment : Fragment() {
             adapter.setOnFavoriteClickListener(object :
                 FavoriteTrackAdapter.OnFavoriteClickListener {
                 override fun onFavoriteClick(position: Int) {
-                    viewModel.deleteFavoriteTrackWithId(favoriteTrackList[position].remoteId)
+                    viewModel.deleteFavoriteTrackWithId(favoriteTrackList[position].id)
                     viewModel.getAllFavoriteTracks()
                 }
             })

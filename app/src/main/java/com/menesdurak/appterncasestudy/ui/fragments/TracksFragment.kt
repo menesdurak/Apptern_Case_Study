@@ -59,9 +59,10 @@ class TracksFragment : Fragment() {
 
         viewModel.trackList.observe(viewLifecycleOwner) { track ->
             viewModel.favoriteTrackIdList.observe(viewLifecycleOwner) {favoriteTracksIdList ->
+                val albumAdapter = TrackAdapter(albumImageLink, favoriteTracksIdList)
                 binding.recyclerView.layoutManager = LinearLayoutManager(context)
-                val albumAdapter = TrackAdapter(track.data, albumImageLink, favoriteTracksIdList)
                 binding.recyclerView.adapter = albumAdapter
+                albumAdapter.updateList(track.data)
                 albumAdapter.setOnFavoriteClickListener(object : TrackAdapter.OnFavoriteClickListener {
                     override fun onFavoriteClick(position: Int) {
                         val favoriteTrack =
@@ -72,11 +73,13 @@ class TracksFragment : Fragment() {
                                 albumImageLink,
                                 track.data[position].preview
                             )
-                        if (favoriteTrack.remoteId !in favoriteTracksIdList) {
+                        if (favoriteTrack.id !in favoriteTracksIdList) {
                             viewModel.addFavoriteTrack(favoriteTrack)
+                            albumAdapter.updateList(track.data)
 
                         } else {
-                            viewModel.deleteFavoriteTrackWithId(favoriteTrack.remoteId)
+                            viewModel.deleteFavoriteTrackWithId(favoriteTrack.id)
+                            albumAdapter.updateList(track.data)
                         }
                     }
 

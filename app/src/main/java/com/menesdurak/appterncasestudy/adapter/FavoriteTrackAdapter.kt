@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.menesdurak.appterncasestudy.R
 import com.menesdurak.appterncasestudy.data.model.FavoriteTrack
+import com.menesdurak.appterncasestudy.util.convertLengthToMinAndSec
 
 class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
     RecyclerView.Adapter<FavoriteTrackHolder>() {
@@ -54,11 +55,5 @@ class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
 
     fun setOnFavoriteClickListener(listener: OnFavoriteClickListener) {
         favoriteListener = listener
-    }
-
-    private fun convertLengthToMinAndSec(trackLength: Int): String {
-        val minute = trackLength / 60
-        val second = trackLength % 60
-        return "$minute:$second\""
     }
 }
