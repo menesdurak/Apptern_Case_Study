@@ -1,5 +1,6 @@
 package com.menesdurak.appterncasestudy.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -68,6 +69,7 @@ class TrackAdapter(
         favoriteListener = listener
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<TrackData>) {
         itemList.clear()
         itemList.addAll(newList)

@@ -1,5 +1,6 @@
 package com.menesdurak.appterncasestudy.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,9 +11,10 @@ import com.menesdurak.appterncasestudy.R
 import com.menesdurak.appterncasestudy.data.model.FavoriteTrack
 import com.menesdurak.appterncasestudy.util.convertLengthToMinAndSec
 
-class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
+class FavoriteTrackAdapter :
     RecyclerView.Adapter<FavoriteTrackHolder>() {
 
+    private var itemList = mutableListOf<FavoriteTrack>()
     private lateinit var playListener: OnPlayClickListener
     private lateinit var favoriteListener: OnFavoriteClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteTrackHolder {
@@ -22,18 +24,18 @@ class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
         )
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: FavoriteTrackHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.tvTrackName).text = list[position].name
+        holder.itemView.findViewById<TextView>(R.id.tvTrackName).text = itemList[position].name
         holder.itemView.findViewById<TextView>(R.id.tvTrackLength).text =
-            convertLengthToMinAndSec(list[position].length)
+            convertLengthToMinAndSec(itemList[position].length)
 
         holder.itemView.findViewById<ImageView>(R.id.ivFavorite)
             .setImageResource(R.drawable.ic_favorite_filled)
         Glide
             .with(holder.itemView.context)
-            .load(list[position].imageLink)
+            .load(itemList[position].imageLink)
             .fitCenter()
             .placeholder(R.drawable.loading)
             .into(holder.itemView.findViewById(R.id.ivTrack))
@@ -55,5 +57,12 @@ class FavoriteTrackAdapter(private val list: List<FavoriteTrack>) :
 
     fun setOnFavoriteClickListener(listener: OnFavoriteClickListener) {
         favoriteListener = listener
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<FavoriteTrack>) {
+        itemList.clear()
+        itemList.addAll(newList)
+        notifyDataSetChanged()
     }
 }

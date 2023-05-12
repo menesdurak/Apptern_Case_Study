@@ -44,8 +44,9 @@ class FavoritesFragment : Fragment() {
 
         viewModel.favoriteTrackList.observe(viewLifecycleOwner) { favoriteTrackList ->
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            val adapter = FavoriteTrackAdapter(favoriteTrackList)
+            val adapter = FavoriteTrackAdapter()
             binding.recyclerView.adapter = adapter
+            adapter.updateList(favoriteTrackList)
             adapter.setOnPlayClickListener(object : FavoriteTrackAdapter.OnPlayClickListener {
                 override fun onPlayClick(position: Int) {
                     if (!mediaPlayer.isPlaying) {
@@ -60,7 +61,7 @@ class FavoritesFragment : Fragment() {
                 FavoriteTrackAdapter.OnFavoriteClickListener {
                 override fun onFavoriteClick(position: Int) {
                     viewModel.deleteFavoriteTrackWithId(favoriteTrackList[position].id)
-                    viewModel.getAllFavoriteTracks()
+                    adapter.updateList(favoriteTrackList)
                 }
             })
         }
