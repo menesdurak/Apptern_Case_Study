@@ -9,7 +9,7 @@ class FavoriteTrackRepository @Inject constructor(private val favoriteTrackDao: 
         favoriteTrackDao.addFavoriteTrack(favoriteTrack)
     }
 
-    suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Int) {
+    suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Long) {
         favoriteTrackDao.deleteFavoriteTrackWithId(favoriteTrackId)
     }
 

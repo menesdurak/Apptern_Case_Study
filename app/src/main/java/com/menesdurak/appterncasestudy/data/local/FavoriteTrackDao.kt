@@ -13,7 +13,7 @@ interface FavoriteTrackDao {
     suspend fun addFavoriteTrack(favoriteTrack: FavoriteTrack)
 
     @Query("DELETE FROM favorite_tracks_table WHERE id = :favoriteTrackId")
-    suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Int)
+    suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Long)
 
     @Query("SELECT * FROM favorite_tracks_table ORDER BY id ASC")
     suspend fun getAllFavoriteTracks(): List<FavoriteTrack>

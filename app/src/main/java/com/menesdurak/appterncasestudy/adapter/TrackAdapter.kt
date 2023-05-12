@@ -13,7 +13,7 @@ import com.menesdurak.appterncasestudy.util.convertLengthToMinAndSec
 
 class TrackAdapter(
     private val albumImageLink: String,
-    private val favoriteTracksIdList: List<Int>
+    private val favoriteTracksIdList: List<Long>
 ) :
     RecyclerView.Adapter<TrackHolder>() {
 
