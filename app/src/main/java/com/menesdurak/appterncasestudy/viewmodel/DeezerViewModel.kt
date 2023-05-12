@@ -78,25 +78,21 @@ class DeezerViewModel @Inject constructor(
     fun addFavoriteTrack(favoriteTrack: FavoriteTrack) {
         viewModelScope.launch {
             favoriteTrackRepository.addFavoriteTrack(favoriteTrack)
-        }
-    }
-
-    fun deleteFavoriteTrack(favoriteTrack: FavoriteTrack) {
-        viewModelScope.launch {
-            favoriteTrackRepository.deleteFavoriteTrack(favoriteTrack)
+            getAllFavoriteTrackIds()
         }
     }
 
     fun deleteFavoriteTrackWithId(favoriteTrackId: Int) {
         viewModelScope.launch {
             favoriteTrackRepository.deleteFavoriteTrackWithId(favoriteTrackId)
+            getAllFavoriteTrackIds()
         }
     }
 
     fun getAllFavoriteTrackIds() {
         viewModelScope.launch {
-            _favoriteTrackIdList.value = favoriteTrackRepository.getAllFavoriteTracks().map {
-                it.remoteId
+            _favoriteTrackIdList.value = favoriteTrackRepository.getAllFavoriteTracks().map { favoriteTrack ->
+                favoriteTrack.id
             }
         }
     }
