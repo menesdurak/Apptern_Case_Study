@@ -1,7 +1,6 @@
 package com.menesdurak.appterncasestudy.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -13,13 +12,10 @@ interface FavoriteTrackDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavoriteTrack(favoriteTrack: FavoriteTrack)
 
-    @Delete
-    suspend fun deleteFavoriteTrack(favoriteTrack: FavoriteTrack)
-
-    @Query("DELETE FROM favorite_tracks_table WHERE remoteId = :favoriteTrackId")
+    @Query("DELETE FROM favorite_tracks_table WHERE id = :favoriteTrackId")
     suspend fun deleteFavoriteTrackWithId(favoriteTrackId: Int)
 
-    @Query("SELECT * FROM favorite_tracks_table ORDER BY localId ASC")
+    @Query("SELECT * FROM favorite_tracks_table ORDER BY id ASC")
     suspend fun getAllFavoriteTracks(): List<FavoriteTrack>
 
 }
