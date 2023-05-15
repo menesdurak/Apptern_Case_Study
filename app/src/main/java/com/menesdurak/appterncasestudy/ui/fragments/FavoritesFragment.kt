@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.menesdurak.appterncasestudy.adapter.FavoriteTrackAdapter
 import com.menesdurak.appterncasestudy.databinding.FragmentFavoritesBinding
@@ -18,12 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            defaultViewModelProviderFactory
-        )[DeezerViewModel::class.java]
-    }
+    private val viewModel: DeezerViewModel by viewModels()
 
     private val mediaPlayer: MediaPlayer = MediaPlayer()
 
