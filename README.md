@@ -4,6 +4,8 @@ Deezer App
   </p>
 </br>
 
+Deezer with Clean Architecture: https://github.com/menesdurak/Deezer_Clean_Architecture (Not finished yet)
+
 ## Screenshots
 <table>
     <tr>
