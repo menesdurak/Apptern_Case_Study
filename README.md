@@ -40,7 +40,6 @@ Deezer App
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI related data holder, lifecycle aware.
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
-  - Repository pattern
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) is a dependency injection library for Android
 - [Room](https://developer.android.com/training/data-storage/room) persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite. 
 - [Retrofit](https://square.github.io/retrofit/) A type-safe HTTP client for Android
